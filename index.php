@@ -37,12 +37,27 @@ include('./includes/zendesk_api.php');
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Employee</a>
                     </div>
                     <?php
-                        echo json_decode($response);
+                        $data = json_decode($response,true);
 
-                        foreach($response as $res){
-                            echo $res;
-                            break;
+
+                        echo "<table class='table table-bordered table-striped'>";
+                        echo "<thead>";
+                            echo "<tr>";
+                                echo "<th>Name</th>";
+                                echo "<th>Email</th>";
+                            echo "</tr>";
+                        echo "</thead>";
+                        echo "<tbody>";
+                        foreach($data["users"] as $res){
+                            // var_dump($res);
+                            // table
+                                echo "<tr>";
+                                    echo "<td>" . $res["name"] . "</td>";
+                                    echo "<td>" . $res["email"] . "</td>";
+                                echo "</tr>";
                         }
+                        echo "</tbody>";
+                    echo "</table>";
                            
                     ?>
                 </div>
